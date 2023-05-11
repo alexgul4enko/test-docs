@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["./*"],
+      /* init architect components path */
+      "@architect-ui/*": ["./components/architectui/*"],
+      "@architect-ui": ["./components/architectui"],
+      /* init app view path */
+      "@pages/*": ["./view/pages/*"],
+      "@pages": ["./view/pages"],
+      "@components/*": ["./view/components/*"],
+      "@components": ["./view/components"],
+      "@layout/*": ["./view/layout/*"],
+      /* init shared paths */
+      "@shared-core/*": ["./shared/core/*"],
+      "@shared-core": ["./shared/core"]
+    }
+  }
+}
