@@ -7,7 +7,7 @@ type ButtonProps = {
 export const Button:FC<ButtonProps> = ({children, color, ...props}) => {
     return (
         <button {...props} style={{background: color}}>
-            {children}
+            {children}!!!!
         </button>
     )
 }

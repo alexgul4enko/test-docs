@@ -1,0 +1,44 @@
+on:
+  push:
+    branches:
+      - develop
+      - main
+permissions:
+  contents: write
+
+jobs:
+  build-artifacts:
+    name: Build and pubish documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checking out repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+
+      - name: Cache dependencies
+        id: cache-deps
+        uses: actions/cache@v3
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
+
+      - name: Install dependencies
+        if: steps.cache-deps.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+
+      - name: Build docs 
+        run: yarn docs:build
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./.docs
